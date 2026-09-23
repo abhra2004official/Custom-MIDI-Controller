@@ -17,7 +17,7 @@ Arduino Uno → USB Serial → Serial-to-MIDI Converter → loopMIDI(3rd party s
 - VS Code
 - MinGW/GCC
 - loopMIDI
-- Ableton Live(DAW)
+- Ableton Live(or any other DAW)
 
 # APIs
 - Windows API
