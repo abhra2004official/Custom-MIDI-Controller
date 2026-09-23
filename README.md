@@ -43,5 +43,5 @@ Arduino Uno → USB Serial → C++ Windows MIDI Bridge → loopMIDI(3rd party so
 - Rotate the knob to control the selected parameter(s)
 
 # Purpose
-This project was built to understand how hardware can communicate with Windows at a lower level, from serial communication through the Windows API.
+This project was built to understand how hardware can communicate with Windows at a lower level, through the Windows API.
 
