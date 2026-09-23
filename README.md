@@ -1,11 +1,11 @@
 # Custom-MIDI-Controller
-A custom MIDI controller built with Arduino Uno and a potentiometer, with a C++ Windows MIDI bridge connecting the hardware to Ableton Live(or any other DAW)
+A custom MIDI controller built with Arduino Uno and a potentiometer, with a Serial-to-MIDI Converter (created using C++ and Windows APIs) connecting the hardware to Ableton Live(or any other DAW).
 
 # What it does
 The potentiometer controls a MIDI value from 0 to 127 which can be used to control any no of parameters inside a DAW.
 
 # Signal flow
-Arduino Uno → USB Serial → C++ Windows MIDI Bridge → loopMIDI(3rd party sofware) → Ableton Live(or any other DAW)
+Arduino Uno → USB Serial → Serial-to-MIDI Converter → loopMIDI(3rd party sofware) → Ableton Live(or any other DAW)
 
 # Hardware
 - Arduino Uno
@@ -14,26 +14,29 @@ Arduino Uno → USB Serial → C++ Windows MIDI Bridge → loopMIDI(3rd party so
 
 # Software
 - Arduino IDE
-- VS Code
+- VS Code(MinGW/GCC)
 - loopMIDI
 - Ableton Live(DAW)
 
+# APIs
+- Windows API
+- Windows Multimedia MIDI API
+
 # Project structure
-- `src/arduino/` — Arduino code for reading the potentiometer
-- `src/C++/` — C++ Windows MIDI bridge
+- `src/arduino/custom_knob.ino` — Arduino code for reading the potentiometer
+- `src/C++/serialToMidi.cpp` — C++ Serial-to-MIDI Converter
 
 # How it works
 - The Arduino reads the potentiometer and converts its analog reading from `0–1023` into values ranging from `0–127`.
 - The C++ program opens the Arduino's COM port using the Windows API, reads the serial data, and sends it as a MIDI Control Change message.
 - The C++ program sends MIDI Control Change (CC) messages on MIDI channel 1 using CC number 1.
-- The MIDI message is sent to a virtual MIDI port created with loopMIDI(3rd party software), which allows Ableton Live to receive and map the controller.
+- The MIDI message is sent to a virtual MIDI port created with loopMIDI(3rd party software), which allows Ableton Live(or any other DAW) to receive and map the controller.
 
 # Setting it up
   Connect the potentiometer to the Arduino Uno:
 - Left pin → 5V
 - Middle pin → A0
 - Right pin → GND
-  
 - upload the Arduino code from custom_knob.ino
 - create a virtual midi port with loopMIDI
 - copy the code from .cpp file inside C++ folder
@@ -44,4 +47,3 @@ Arduino Uno → USB Serial → C++ Windows MIDI Bridge → loopMIDI(3rd party so
 
 # Purpose
 This project was built to understand how hardware can communicate with Windows at a lower level, through the Windows API.
-
