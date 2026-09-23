@@ -14,7 +14,8 @@ Arduino Uno → USB Serial → Serial-to-MIDI Converter → loopMIDI(3rd party s
 
 # Software
 - Arduino IDE
-- VS Code(MinGW/GCC)
+- VS Code
+- MinGW/GCC
 - loopMIDI
 - Ableton Live(DAW)
 
@@ -29,7 +30,7 @@ Arduino Uno → USB Serial → Serial-to-MIDI Converter → loopMIDI(3rd party s
 # How it works
 - The Arduino reads the potentiometer and converts its analog reading from `0–1023` into values ranging from `0–127`.
 - The C++ program opens the Arduino's COM port using the Windows API, reads the serial data, and sends it as a MIDI Control Change message.
-- The C++ program sends MIDI Control Change (CC) messages on MIDI channel 1 using CC number 1.
+- The C++ program converts the serial value into a MIDI Control Change (CC) message and sends it on MIDI channel 1.
 - The MIDI message is sent to a virtual MIDI port created with loopMIDI(3rd party software), which allows Ableton Live(or any other DAW) to receive and map the controller.
 
 # Setting it up
@@ -39,8 +40,7 @@ Arduino Uno → USB Serial → Serial-to-MIDI Converter → loopMIDI(3rd party s
 - Right pin → GND
 - upload the Arduino code from custom_knob.ino
 - create a virtual midi port with loopMIDI
-- copy the code from .cpp file inside C++ folder
-- Compile the C++ MIDI bridge with MinGW: `g++ src/C++/serialToMidi.cpp -o midi_bridge.exe -lwinmm`
+- Open a terminal in the root folder of this repository and compile the C++ program with MinGW: `g++ src/C++/serialToMidi.cpp -o midi_bridge.exe -lwinmm`
 - open Ableton Live (or any other DAW) select the virtual midi port to receive data
 - Map any parameter(s) inside the DAW to the knob
 - Rotate the knob to control the selected parameter(s)
